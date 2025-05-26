@@ -26,8 +26,9 @@ class BatchController extends Controller
      */
     public function create()
     {
-
-        return view('batches.create');
+        $courses = Course::pluck('name', 'id');
+        // Trả về view tạo mới với danh sách khóa học
+        return view('batches.create',compact('courses'));
     }
 
     /**

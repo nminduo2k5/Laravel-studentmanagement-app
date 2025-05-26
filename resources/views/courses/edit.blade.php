@@ -14,7 +14,7 @@
         <label>Syllabus</label></br>
         <input type="text" name="syllabus" id="syllabus" value="{{$courses->syllabus}}" class="form-control"></br>
         <label>Duration</label></br>
-        <input type="text" name="duration" id="duration" value="{{$courses->duration}}" class="form-control"></br>
+        <input type="text" name="duration" id="duration" value="{{$courses->duration ()}}" class="form-control"></br>
         <input type="submit" value="Update" class="btn btn-success"></br>
     </form>
    

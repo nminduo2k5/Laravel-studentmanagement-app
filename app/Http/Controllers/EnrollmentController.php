@@ -33,11 +33,27 @@ class EnrollmentController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        // Chuyển đổi join_date từ d/m/Y sang Y-m-d nếu có
+        // Luôn chuyển đổi từ d/m/Y sang Y-m-d nếu có join_date
         if (!empty($input['join_date'])) {
-            $input['join_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $input['join_date'])->format('Y-m-d');
+            try {
+                $input['join_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $input['join_date'])->format('Y-m-d');
+            } catch (\Exception $e) {
+                // Nếu đã là Y-m-d hoặc lỗi, không làm gì cả
+            }
         }
-        Enrollment::create($input);
+        // Đảm bảo enroll_no có giá trị (không để trống)
+        if (empty($input['enroll_no'])) {
+            return redirect()->back()->withInput()->withErrors(['enroll_no' => 'Enroll No is required.']);
+        }
+        // Chỉ lấy đúng các trường cần thiết để insert
+        $data = [
+            'enroll_no' => $input['enroll_no'],
+            'batch_id' => $input['batch_id'],
+            'student_id' => $input['student_id'],
+            'join_date' => $input['join_date'],
+            'fees' => $input['fees'],
+        ];
+        Enrollment::create($data);
         return redirect('enrollments')->with('flash_message', 'Enrollment Added!');
     }
 
@@ -47,7 +63,7 @@ class EnrollmentController extends Controller
     public function show(string $id)
     {
         $enrollment = Enrollment::find($id);
-        return view('enrollments.show')->with('enrollment', $enrollment);
+        return view('enrollments.show')->with('enrollments', $enrollment);
     }
 
     /**
@@ -56,7 +72,7 @@ class EnrollmentController extends Controller
     public function edit(string $id)
     {
         $enrollment = Enrollment::find($id);
-        return view('enrollments.edit')->with('enrollment', $enrollment);
+        return view('enrollments.edit')->with('enrollments', $enrollment);
     }
 
     /**
@@ -66,11 +82,27 @@ class EnrollmentController extends Controller
     {
         $enrollment = Enrollment::find($id);
         $input = $request->all();
-        // Chuyển đổi join_date từ d/m/Y sang Y-m-d nếu có
-        if (!empty($input['join_date'])) {
-            $input['join_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $input['join_date'])->format('Y-m-d');
+        // Đảm bảo join_date không bị null
+        if (empty($input['join_date'])) {
+            return redirect()->back()->withInput()->withErrors(['join_date' => 'Join Date is required.']);
         }
-        $enrollment->update($input);
+        // Luôn chuyển đổi từ d/m/Y sang Y-m-d nếu có join_date
+        if (!empty($input['join_date'])) {
+            try {
+                $input['join_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $input['join_date'])->format('Y-m-d');
+            } catch (\Exception $e) {
+                // Nếu đã là Y-m-d hoặc lỗi, giữ nguyên không gán lại
+            }
+        }
+        // Chỉ lấy đúng các trường cần thiết để update
+        $data = [
+            'enroll_no' => $input['enroll_no'],
+            'batch_id' => $input['batch_id'],
+            'student_id' => $input['student_id'],
+            'join_date' => $input['join_date'],
+            'fees' => $input['fees'],
+        ];
+        $enrollment->update($data);
         return redirect('enrollments')->with('flash_message', 'Enrollment Updated!');
     }
 

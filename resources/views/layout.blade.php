@@ -4,182 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Animate.css for Bootstrap Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Student Management System</title>
     <style>
-        body {
-            min-height: 100vh;
-            /* Gradient tím hồng - xanh cyan hiện đại */
-            background: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 50%, #5eead4 100%);
-            font-family: 'Montserrat', Arial, sans-serif;
-            animation: fadeInBody 1s;
+        /* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background: linear-gradient(180deg, #e0eafc 0%, #cfdef3 100%);
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+  border-right: 1px solid #d1d9e6;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: #22223b;
+  padding: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
+  min-height: 100vh;
+}
+
+.theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            z-index: 1050;
+            background: #fff;
+            border-radius: 50%;
+            border: 1px solid #d1d9e6;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: background 0.3s;
         }
-        @keyframes fadeInBody {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .navbar {
-            border-radius: 16px;
-            margin-top: 24px;
-            box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
-            background:  #a18cd1;
-        }
-        .navbar-brand h2 {
-            font-weight: 600;
-            color: #2d3436;
-            margin-left:360px;
-            letter-spacing: 1px;
-        }
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 220px;
-            /* Màu sidebar giống màu content */
-            background: 
-                linear-gradient(135deg, rgba(161,140,209,0.13) 0%, rgba(94,234,212,0.13) 100%),
-                rgba(255,255,255,0.55);
-            position: fixed;
-            height: 90vh;
-            top: 80px;
-            left: -250px;
-            border-radius: 18px;
-            box-shadow: 0 8px 32px 0 rgba(161, 140, 209, 0.08);
-            overflow: auto;
-            transition: left 0.7s cubic-bezier(.68,-0.55,.27,1.55);
-            animation: slideInSidebar 1s forwards;
-        }
-        @keyframes slideInSidebar {
-            to { left: 40px; }
-        }
-        .sidebar a {
-            display: block;
-            color: #6d4e9e;
-            padding: 18px 28px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            margin: 8px 12px;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-            opacity: 0;
-            transform: translateX(-30px);
-            animation: fadeInLink 0.7s forwards;
-        }
-        .sidebar a:nth-child(1) { animation-delay: 0.5s; }
-        .sidebar a:nth-child(2) { animation-delay: 0.6s; }
-        .sidebar a:nth-child(3) { animation-delay: 0.7s; }
-        .sidebar a:nth-child(4) { animation-delay: 0.8s; }
-        .sidebar a:nth-child(5) { animation-delay: 0.9s; }
-        .sidebar a:nth-child(6) { animation-delay: 1.0s; }
-        .sidebar a:nth-child(7) { animation-delay: 1.1s; }
-        @keyframes fadeInLink {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        .sidebar a.active, .sidebar a:hover {
-            /* Gradient tím hồng - cyan nhạt */
-            background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 60%, #5eead4 100%);
+        .theme-toggle.dark {
+            background: #22223b;
             color: #fff;
-            font-weight: 600;
-            transform: scale(1.05);
-            box-shadow: 0 2px 8px rgba(161, 140, 209, 0.13);
+            border: 1px solid #555;
         }
-        .content {
-            margin-left: 50px; /* Sát sidebar hơn */
-            margin-top: 10px;
-            padding: 40px 36px;
-            /* Gradient glassmorphism tím hồng - cyan nhạt */
-            background: 
-                linear-gradient(135deg, rgba(161,140,209,0.13) 0%, rgba(94,234,212,0.13) 100%),
-                rgba(255,255,255,0.55);
-            border-radius: 24px;
-            min-height: 82vh;
-            box-shadow: 0 12px 40px 0 rgba(161, 140, 209, 0.13), 0 1.5px 8px rgba(44, 62, 80, 0.08);
-            animation: fadeInContent 1.2s;
-            backdrop-filter: blur(16px) saturate(160%);
-            -webkit-backdrop-filter: blur(16px) saturate(160%);
-            border: 1.5px solid rgba(255,255,255,0.25);
-            transition: box-shadow 0.3s, background 0.3s;
+        .toast-container {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            z-index: 2000;
         }
-        @keyframes fadeInContent {
-            from { opacity: 0; transform: translateY(30px);}
-            to { opacity: 1; transform: translateY(0);}
+        body.dark-mode {
+            background: linear-gradient(135deg, #232946 0%, #22223b 100%);
+            color: #f4f4f4;
         }
-        /* Card, box, panel, alert trong content */
-        .content .card,
-        .content .panel,
-        .content .box,
-        .content .alert,
-        .content .info-box {
-            background: linear-gradient(120deg, rgba(161,140,209,0.10) 0%, rgba(251,194,235,0.10) 50%, rgba(94,234,212,0.10) 100%), rgba(255,255,255,0.75);
-            border-radius: 18px;
-            box-shadow: 0 2px 12px 0 rgba(161, 140, 209, 0.08);
-            border: 1px solid rgba(161,140,209,0.09);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: #4b3869;
+        body.dark-mode .sidebar {
+            background: linear-gradient(180deg, #232946 0%, #22223b 100%);
+            color: #f4f4f4;
+            border-right: 1px solid #232946;
         }
-        .content .card-header,
-        .content .panel-heading {
-            background: transparent;
-            border-bottom: 1px solid rgba(161,140,209,0.08);
-            color: #6d4e9e;
-            font-weight: 600;
+        body.dark-mode .sidebar a {
+            color: #f4f4f4;
         }
-        .content .alert {
-            border-left: 4px solid #a18cd1;
+        body.dark-mode .sidebar a.active {
+            background-color: #04AA6D;
+            color: #fff;
         }
-        @media screen and (max-width: 900px) {
-            .sidebar {
-                position: static;
-                width: 100%;
-                height: auto;
-                margin: 0 0 24px 0;
-                left: 0;
-                top: 0;
-                border-radius: 16px;
-                animation: none;
-                transition: none;
-            }
-            .content {
-                margin-left: 0;
-                margin-top: 0;
-                border-radius: 18px;
-                padding: 24px 10px;
-            }
+        body.dark-mode .sidebar a:hover:not(.active) {
+            background-color: #555;
+            color: #fff;
         }
-        @media screen and (max-width: 600px) {
-            .sidebar a {
-                padding: 14px 10px;
-                font-size: 1rem;
-                margin: 6px 6px;
-            }
-            .content {
-                padding: 16px 6px;
-            }
+        body.dark-mode .navbar {
+            background: #232946 !important;
         }
     </style>
+
+
+
+
+
+
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#"><h2>Student Management Project</h2></a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
-                    </div>
-                </nav>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+        <i class="bi bi-moon"></i>
+    </div>
+    <!-- Toast Notification -->
+    <div class="toast-container">
+        <div id="mainToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    Welcome to Student Management System!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <div class="sidebar mt-3">
+            <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light animate__animated animate__fadeInDown">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"><h2>Student Management Project</h2></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    </div>
+                </div>
+            </nav>
+            </div> 
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <!-- The sidebar -->
+                <div class="sidebar animate__animated animate__fadeInLeft">
                     <a class="active" href="#home">Home</a>
                     <a href="{{ url('/students') }}">Student</a>
                     <a href="{{ url('/teachers') }}">Teacher</a>
@@ -189,12 +183,36 @@
                     <a href="{{ url('/payment') }}">Payment</a>
                 </div>
             </div>
-            <div class="col-lg-9 col-md-8">
-                <div class="content mt-3">
+            <div class="col-md-9">
+                <div class="animate__animated animate__fadeInUp">
                     @yield('content')
                 </div>
             </div>
         </div>
     </div>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme toggle logic
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        themeToggle.onclick = function() {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.classList.toggle('dark');
+            if(document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('bi-moon');
+                icon.classList.add('bi-sun');
+            } else {
+                icon.classList.remove('bi-sun');
+                icon.classList.add('bi-moon');
+            }
+        };
+        // Show toast on load
+        window.addEventListener('DOMContentLoaded', function() {
+            var toastEl = document.getElementById('mainToast');
+            var toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+            toast.show();
+        });
+    </script>
 </body>
 </html>

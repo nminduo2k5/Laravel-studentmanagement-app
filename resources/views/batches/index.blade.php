@@ -26,7 +26,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->course_id }}</td>
+                                        <td>{{ $item->course->name }}</td>
                                         <td>{{ \Carbon\Carbon::parse($item->start_date)->format('d/m/Y') }}</td>
  
                                         <td>
