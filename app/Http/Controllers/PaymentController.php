@@ -24,7 +24,9 @@ class PaymentController extends Controller
      */
     public function create(): View
     {
-        $payments= Payment::pluck('enroll_no  ', 'id');
+        // Nếu cần danh sách enrollments để chọn:
+        // $enrollments = \App\Models\Enrollment::pluck('id', 'id');
+        // return view('payments.create', compact('enrollments'));
         return view('payments.create');
     }
 
