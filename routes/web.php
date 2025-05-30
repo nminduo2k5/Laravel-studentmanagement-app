@@ -5,20 +5,26 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\PaymentController; //      */  
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('layout');
 });
 
-Route::resource("/students", StudentController::class);
+// Authentication Routes
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource("/teachers", TeacherController::class);
-
-Route::resource("/courses", CourseController::class);
-
-Route::resource("/batches", BatchController::class);
-
-Route::resource("/enrollments", EnrollmentController::class);
-
-Route::resource("/payments", PaymentController::class);
+// Resource Routes - Yêu cầu đăng nhập
+Route::middleware(['auth'])->group(function () {
+    Route::resource("/students", StudentController::class);
+    Route::resource("/teachers", TeacherController::class);
+    Route::resource("/courses", CourseController::class);
+    Route::resource("/batches", BatchController::class);
+    Route::resource("/enrollments", EnrollmentController::class);
+    Route::resource("/payments", PaymentController::class);
+});
