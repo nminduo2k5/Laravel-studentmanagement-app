@@ -37,10 +37,10 @@
     <!-- Sidebar -->
     <div class="sidebar animate__animated animate__fadeInLeft">
         <div class="text-center mb-4">
-            <img src="{{ asset('img/phenikaa.png') }}" alt="Phenikaa Logo" class="mb-3" width="100" height="100">
+            <img src="{{ asset('img/phenikaa.png') }}" alt="Phenikaa Logo" class="mb-3" width="150" height="100">
             <h5 class="fw-bold sidebar-title">Student Management</h5>
         </div>
-        <a class="active" href="#home"><i class="bi bi-house-door"></i> Dashboard</a>
+        <a href="{{ route('dashboard') }}"><i class="bi bi-house-door"></i> Dashboard</a>
         <a href="{{ url('/students') }}"><i class="bi bi-people"></i> Students</a>
         <a href="{{ url('/teachers') }}"><i class="bi bi-person-video3"></i> Teachers</a>
         <a href="{{ url('/courses') }}"><i class="bi bi-book"></i> Courses</a>

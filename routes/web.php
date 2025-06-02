@@ -8,7 +8,11 @@ use App\Http\Controllers\PaymentController; //      */
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+// Dashboard Route
+Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+// Layout Route
+Route::get('/layout', function () {
     return view('layout');
 });
 
