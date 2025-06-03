@@ -65,4 +65,11 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+    
+    // Hiển thị hồ sơ người dùng
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('auth.profile', compact('user'));
+    }
 }

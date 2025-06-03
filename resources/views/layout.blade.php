@@ -81,8 +81,8 @@
                                         <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Cài đặt</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="bi bi-person me-2"></i>Hồ sơ</a></li>
+                                
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <form action="{{ route('logout') }}" method="POST">

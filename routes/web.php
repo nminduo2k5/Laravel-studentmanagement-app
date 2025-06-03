@@ -22,6 +22,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/profile', [AuthController::class, 'profile'])->name('profile')->middleware('auth');
 
 // Resource Routes - Yêu cầu đăng nhập
 Route::middleware(['auth'])->group(function () {
