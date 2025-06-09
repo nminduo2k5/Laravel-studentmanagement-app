@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('enroll_no');
             $table->unsignedBigInteger('enrollment_id');
             $table->date('payment_date');
             $table->double('amount');

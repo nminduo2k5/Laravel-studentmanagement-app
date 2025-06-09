@@ -47,13 +47,13 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended(route('dashboard'))->with('success', 'Đăng nhập thành công!');
         }
 
         return back()->withErrors([
-            'email' => 'Thông tin đăng nhập không chính xác.',
+            'email' => 'Email hoặc mật khẩu không đúng.',
         ])->onlyInput('email');
     }
 
@@ -63,7 +63,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('login')->with('success', 'Đăng xuất thành công!');
     }
     
     // Hiển thị hồ sơ người dùng
@@ -71,5 +71,23 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         return view('auth.profile', compact('user'));
+    }
+    
+    // Cập nhật hồ sơ người dùng
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+        ]);
+        
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+        
+        return redirect()->route('profile')->with('success', 'Hồ sơ đã được cập nhật thành công!');
     }
 }

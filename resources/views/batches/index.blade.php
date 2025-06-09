@@ -2,10 +2,10 @@
 @section('content')
                 <div class="card">
                     <div class="card-header">
-                        <h2>Batches </h2>
+                        <h2>Classes </h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{ url('/batches/create') }}" class="btn btn-success btn-sm" title="Add New Batch">
+                        <a href="{{ url('/batches/create') }}" class="btn btn-success btn-sm" title="Add New Class">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
                         <br/>
@@ -36,7 +36,7 @@
                                             <form method="POST" action="{{ url('/batches' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Batch" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Class" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>

@@ -3,7 +3,7 @@
  
  
 <div class="card">
-  <div class="card-header">Batches</div>
+  <div class="card-header">Classes</div>
   <div class="card-body">
    
  

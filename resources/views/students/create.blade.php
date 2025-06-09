@@ -9,6 +9,8 @@
         {!! csrf_field() !!}
         <label>Name</label></br>
         <input type="text" name="name" id="name" class="form-control"></br>
+        <label>GPA</label></br>
+        <input type="number" name="gpa" id="gpa" class="form-control" step="0.01" min="0" max="4.00"></br>
         <label>Address</label></br>
         <input type="text" name="address" id="address" class="form-control"></br>
         <label>Mobile</label></br>

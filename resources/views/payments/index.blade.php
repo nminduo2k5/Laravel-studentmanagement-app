@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h2>Payments</h2>
+        <h2>Payments Management</h2>
     </div>
     <div class="card-body">
         <a href="{{ url('/payments/create') }}" class="btn btn-success btn-sm" title="Add New Payment">
@@ -11,11 +11,13 @@
         <br/>
         <br/>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table ">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Enrollment ID</th>
+                        <th>Student</th>
+                        <th>Course</th>
+                        <th>Batch</th>
                         <th>Payment Date</th>
                         <th>Amount</th>
                         <th>Actions</th>
@@ -25,9 +27,11 @@
                 @foreach($payments as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->enrollment_id }}</td>
-                        <td>{{ $item->payment_date }}</td>
-                        <td>{{ $item->amount }}</td>
+                        <td>{{ $item->enrollment && $item->enrollment->student ? $item->enrollment->student->name : 'N/A' }}</td>
+                        <td>{{ $item->enrollment && $item->enrollment->batch && $item->enrollment->batch->course ? $item->enrollment->batch->course->name : 'N/A' }}</td>
+                        <td>{{ $item->enrollment && $item->enrollment->batch ? $item->enrollment->batch->name : 'N/A' }}</td>
+                        <td>{{ date('d-m-Y', strtotime($item->payment_date)) }}</td>
+                        <td>{{ number_format($item->amount, 2) }}</td>
                         <td>
                             <a href="{{ url('/payments/' . $item->id) }}" title="View Payment"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> View</button></a>
                             <a href="{{ url('/payments/' . $item->id . '/edit') }}" title="Edit Payment"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</button></a>

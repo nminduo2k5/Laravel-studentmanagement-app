@@ -5,6 +5,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Payment;
+use App\Models\Enrollment;
 use Illuminate\View\View;
 
 
@@ -15,7 +16,7 @@ class PaymentController extends Controller
      */
     public function index(): View
     {
-        $payments = Payment::all();
+        $payments = Payment::with('enrollment.student', 'enrollment.batch')->get();
         return view('payments.index')->with('payments', $payments);
     }
 
@@ -24,10 +25,16 @@ class PaymentController extends Controller
      */
     public function create(): View
     {
-        // Nếu cần danh sách enrollments để chọn:
-        // $enrollments = \App\Models\Enrollment::pluck('id', 'id');
-        // return view('payments.create', compact('enrollments'));
-        return view('payments.create');
+        $enrollments = Enrollment::with('student', 'batch')
+            ->get()
+            ->map(function($enrollment) {
+                return [
+                    'id' => $enrollment->id,
+                    'text' => "#{$enrollment->enroll_no} - {$enrollment->student->name} ({$enrollment->batch->name})"
+                ];
+            })
+            ->pluck('text', 'id');
+        return view('payments.create', compact('enrollments'));
     }
 
     /**
@@ -35,8 +42,13 @@ class PaymentController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $input = $request->all();
-        Payment::create($input);
+        $validated = $request->validate([
+            'enrollment_id' => 'required|exists:enrollments,id',
+            'payment_date' => 'required|date',
+            'amount' => 'required|numeric|min:0',
+        ]);
+        
+        Payment::create($validated);
         return redirect('payments')->with('flash_message', 'Payment Added!');
     }
 
@@ -45,7 +57,7 @@ class PaymentController extends Controller
      */
     public function show(string $id): View
     {
-        $payment = Payment::find($id);
+        $payment = Payment::with('enrollment.student', 'enrollment.batch')->find($id);
         return view('payments.show')->with('payments', $payment);
     }
 
@@ -55,7 +67,16 @@ class PaymentController extends Controller
     public function edit(string $id): View
     {
         $payment = Payment::find($id);
-        return view('payments.edit')->with('payments', $payment);
+        $enrollments = Enrollment::with('student', 'batch')
+            ->get()
+            ->map(function($enrollment) {
+                return [
+                    'id' => $enrollment->id,
+                    'text' => "#{$enrollment->enroll_no} - {$enrollment->student->name} ({$enrollment->batch->name})"
+                ];
+            })
+            ->pluck('text', 'id');
+        return view('payments.edit', compact('payment', 'enrollments'));
     }
 
     /**
@@ -63,9 +84,14 @@ class PaymentController extends Controller
      */
     public function update(Request $request, string $id): RedirectResponse
     {
+        $validated = $request->validate([
+            'enrollment_id' => 'required|exists:enrollments,id',
+            'payment_date' => 'required|date',
+            'amount' => 'required|numeric|min:0',
+        ]);
+        
         $payment = Payment::find($id);
-        $input = $request->all();
-        $payment->update($input);
+        $payment->update($validated);
         return redirect('payments')->with('flash_message', 'Payment Updated!');
     }
 

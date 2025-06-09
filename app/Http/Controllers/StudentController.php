@@ -28,6 +28,13 @@ class StudentController extends Controller
   
     public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'gpa' => 'nullable|numeric|between:0,4.00',
+            'address' => 'required|string',
+            'mobile' => 'required|string'
+        ]);
+        
         $input = $request->all();
         Student::create($input);
         return redirect('students')->with('flash_message', 'Student Addedd!');
@@ -47,6 +54,13 @@ class StudentController extends Controller
 
     public function update(Request $request, string $id): RedirectResponse
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'gpa' => 'nullable|numeric|between:0,4.00',
+            'address' => 'required|string',
+            'mobile' => 'required|string'
+        ]);
+        
         $student = Student::find($id);
         $input = $request->all();
         $student->update($input);

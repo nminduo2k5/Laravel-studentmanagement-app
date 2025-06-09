@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">
-                            <a href="{{ url('/students') }}" class="btn btn-sm btn-outline-primary">Xem chi tiết</a>
+                            <a href="{{ url('/students') }}" class="btn btn-sm btn-outline-primary">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">
-                            <a href="{{ url('/teachers') }}" class="btn btn-sm btn-outline-success">Xem chi tiết</a>
+                            <a href="{{ url('/teachers') }}" class="btn btn-sm btn-outline-success">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">
-                            <a href="{{ url('/courses') }}" class="btn btn-sm btn-outline-info">Xem chi tiết</a>
+                            <a href="{{ url('/courses') }}" class="btn btn-sm btn-outline-info">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <div class="card stat-card">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
-                                <h5 class="stat-title">Batches</h5>
+                                <h5 class="stat-title">Classes</h5>
                                 <h2 class="stat-number">{{ $batchCount }}</h2>
                             </div>
                             <div class="stat-icon text-warning">
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">
-                            <a href="{{ url('/batches') }}" class="btn btn-sm btn-outline-warning">Xem chi tiết</a>
+                            <a href="{{ url('/batches') }}" class="btn btn-sm btn-outline-warning">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="card-footer bg-transparent border-0">
-                            <a href="{{ url('/enrollments') }}" class="btn btn-sm btn-outline-danger">Xem chi tiết</a>
+                            <a href="{{ url('/enrollments') }}" class="btn btn-sm btn-outline-danger">View Details</a>
                         </div>
                     </div>
                 </div>

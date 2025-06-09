@@ -16,6 +16,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>GPA</th>
                                         <th>Address</th>
                                         <th>Mobile</th>
                                         <th>Actions</th>
@@ -26,6 +27,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->gpa }}</td>
                                         <td>{{ $item->address }}</td>
                                         <td>{{ $item->mobile }}</td>
  

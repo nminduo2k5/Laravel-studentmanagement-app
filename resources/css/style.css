@@ -244,10 +244,11 @@ body.dark-mode .navbar {
     color: #f4f4f4;
 }
 
-body.dark-mode .card {
-    background: #1a1a2e;
-    color: #f4f4f4;
-    border-color: #333;
+body.dark-mode .card,
+body.dark-mode .stat-card {
+    background-color: #1a1a2e !important;
+    color: #f4f4f4 !important;
+    border-color: #333 !important;
 }
 
 body.dark-mode .navbar-brand {
@@ -322,21 +323,26 @@ body.dark-mode .form-control:focus {
     border-color: var(--primary-color);
 }
 
-body.dark-mode .table {
-    color: #f4f4f4;
-}
-
-body.dark-mode .table td, 
-body.dark-mode .table th {
-    border-color: #333;
+body.dark-mode .table,
+body.dark-mode .table th,
+body.dark-mode .table td {
+    color: #f4f4f4 !important;
+    background-color: #232946 !important;
+    border-color: #333 !important;
 }
 
 body.dark-mode .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255,255,255,0.05) !important;
 }
 
 body.dark-mode .table-hover > tbody > tr:hover {
-    background-color: rgba(255, 255, 255, 0.075);
+    background-color: rgba(255,255,255,0.075) !important;
+}
+
+body.dark-mode .content,
+body.dark-mode .content-wrapper {
+    background-color: #232946 !important;
+    color: #f4f4f4 !important;
 }
 
 /* Animation for content */
