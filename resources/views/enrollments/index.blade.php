@@ -15,7 +15,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Enrollment No</th>
+                        <th>En_No</th>
                         <th>Student</th>
                         <th>Course</th>
                         <th>Class</th>
