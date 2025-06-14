@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('mobile');
+            $table->string('specialization')->nullable();
+            $table->integer('experience')->nullable();
+            $table->string('qualification')->nullable();
+            $table->date('join_date')->nullable();
             $table->timestamps();
         });
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Course;
+use App\Models\Teacher;
 use Illuminate\View\View;
 
 
@@ -20,9 +21,11 @@ class CourseController extends Controller
     }
 
  
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('courses.create');
+        $teachers = Teacher::pluck('name', 'id');
+        $selectedTeacherId = $request->query('teacher_id');
+        return view('courses.create', compact('teachers', 'selectedTeacherId'));
     }
 
   
@@ -35,8 +38,8 @@ class CourseController extends Controller
 
     public function show(string $id): View
     {
-        $Course = Course::find($id);
-        return view('courses.show')->with('courses', $Course);
+        $course = Course::with(['batches.enrollments', 'teachers'])->find($id);
+        return view('courses.show')->with('course', $course);
     }
 
     public function edit(string $id): View

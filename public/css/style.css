@@ -1,3 +1,4 @@
+/* ==================== Biến màu sắc và cấu hình chung ==================== */
 :root {
     --primary-color: #4361ee;
     --secondary-color: #3f37c9;
@@ -11,6 +12,7 @@
     --sidebar-width: 260px;
 }
 
+/* ==================== Thiết lập cho body ==================== */
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #f8fafc 0%, #e0eafc 100%);
@@ -18,7 +20,7 @@ body {
     transition: var(--transition);
 }
 
-/* The side navigation menu */
+/* ==================== Sidebar (Thanh điều hướng bên trái) ==================== */
 .sidebar {
     margin: 0;
     padding: 20px 0;
@@ -34,7 +36,7 @@ body {
     z-index: 1020;
 }
 
-/* Sidebar links */
+/* ==================== Liên kết trong sidebar ==================== */
 .sidebar a {
     display: flex;
     align-items: center;
@@ -52,26 +54,32 @@ body {
     font-size: 1.2rem;
 }
 
-/* Active/current link */
+/* Liên kết đang được chọn */
 .sidebar a.active {
     background-color: var(--primary-color);
     color: white;
 }
 
-/* Links on mouse-over */
+/* Hiệu ứng hover cho liên kết sidebar */
 .sidebar a:hover:not(.active) {
     background-color: #f1f5fe;
     color: var(--primary-color);
 }
 
-/* Page content */
+/* ==================== Nội dung trang chính ==================== */
 div.content {
-    margin-left: var(--sidebar-width);
-    padding: 20px;
-    min-height: 100vh;
+    margin-left: calc(var(--sidebar-width) + 10px); /* tăng khoảng cách một chút */
+    padding: 32px 40px 40px 40px; /* padding lớn hơn cho thoáng */
+    min-height: 120vh; /* tăng chiều dài tối thiểu */
+    max-width: 1400px; /* giới hạn chiều rộng tối đa để không quá rộng trên màn hình lớn */
+    width: 100%;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 0;
+    box-sizing: border-box;
 }
 
-/* Custom card styles */
+/* ==================== Card thống kê (stat-card) ==================== */
 .stat-card {
     border-radius: var(--border-radius);
     padding: 20px;
@@ -102,7 +110,7 @@ div.content {
     font-weight: 500;
 }
 
-/* Responsive layout */
+/* ==================== Responsive layout (Giao diện đáp ứng) ==================== */
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 100%;
@@ -129,6 +137,7 @@ div.content {
     }
 }
 
+/* ==================== Nút chuyển đổi giao diện sáng/tối ==================== */
 .theme-toggle {
     position: fixed;
     top: 20px;
@@ -152,6 +161,7 @@ div.content {
     color: #fff;
 }
 
+/* ==================== Toast thông báo ==================== */
 .toast-container {
     position: fixed;
     top: 80px;
@@ -159,6 +169,7 @@ div.content {
     z-index: 2000;
 }
 
+/* ==================== Card chung ==================== */
 .card {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -172,6 +183,7 @@ div.content {
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
 }
 
+/* ==================== Navbar (Thanh điều hướng trên) ==================== */
 .navbar {
     background: #fff !important;
     box-shadow: var(--box-shadow);
@@ -208,7 +220,7 @@ body.dark-mode .navbar-brand::after {
     box-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
 }
 
-/* Dark mode styles */
+/* ==================== Giao diện Dark Mode ==================== */
 body.dark-mode {
     background: linear-gradient(135deg, #232946 0%, #121629 100%);
     color: #f4f4f4;
@@ -263,6 +275,7 @@ body.dark-mode .bg-light {
     background-color: #1a1a2e !important;
 }
 
+/* ==================== Liên kết trong navbar ==================== */
 .nav-link {
     transition: var(--transition);
 }
@@ -275,6 +288,7 @@ body.dark-mode .nav-link:hover {
     color: var(--success-color) !important;
 }
 
+/* ==================== Dropdown menu ==================== */
 body.dark-mode .dropdown-menu {
     background-color: #1a1a2e;
     border-color: #333;
@@ -298,6 +312,7 @@ body.dark-mode .dropdown-divider {
     border-top-color: #333;
 }
 
+/* ==================== Card header trong dark mode ==================== */
 body.dark-mode .card-header {
     background-color: #232946;
     border-bottom-color: #333;
@@ -305,6 +320,7 @@ body.dark-mode .card-header {
     font-weight: 500;
 }
 
+/* ==================== Form control trong dark mode ==================== */
 body.dark-mode .form-control {
     background-color: #2a2a3a;
     border-color: #333;
@@ -322,6 +338,7 @@ body.dark-mode .form-control:focus {
     border-color: var(--primary-color);
 }
 
+/* ==================== Bảng (table) trong dark mode ==================== */
 body.dark-mode .table {
     color: #f4f4f4;
 }
@@ -339,12 +356,12 @@ body.dark-mode .table-hover > tbody > tr:hover {
     background-color: rgba(255, 255, 255, 0.075);
 }
 
-/* Animation for content */
+/* ==================== Hiệu ứng xuất hiện (fade-in) ==================== */
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Nút và badge trong dark mode */
+/* ==================== Nút và badge trong dark mode ==================== */
 body.dark-mode .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
@@ -361,11 +378,13 @@ body.dark-mode .badge {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
+/* ==================== Keyframes cho hiệu ứng fadeIn ==================== */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==================== Wrapper cho nội dung (nếu dùng) ==================== */
 .content-wrapper {
     margin-left: var(--sidebar-width);
     padding: 20px;

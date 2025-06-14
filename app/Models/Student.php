@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Student extends Model
 {
@@ -12,21 +11,44 @@ class Student extends Model
     
     protected $table = 'students';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'email', 'gpa', 'address', 'mobile'];
+    protected $fillable = ['name', 'address', 'mobile', 'gpa'];
     
     /**
-     * Get the enrollments for the student.
+     * Lấy các đăng ký của sinh viên
      */
-    public function enrollments(): HasMany
+    public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
     }
     
     /**
-     * Get all payments made by this student through enrollments.
+     * Lấy các thanh toán của sinh viên
      */
     public function payments()
     {
         return $this->hasManyThrough(Payment::class, Enrollment::class);
+    }
+    
+    /**
+     * Lấy các lớp học mà sinh viên đã đăng ký
+     */
+    public function batches()
+    {
+        return $this->belongsToMany(Batch::class, 'enrollments');
+    }
+    
+    /**
+     * Lấy các khóa học mà sinh viên đã đăng ký
+     */
+    public function courses()
+    {
+        return $this->hasManyThrough(
+            Course::class,
+            Enrollment::class,
+            'student_id', // Khóa ngoại trên enrollments
+            'id', // Khóa chính trên courses
+            'id', // Khóa chính trên students
+            'batch_id' // Khóa ngoại trên enrollments
+        );
     }
 }

@@ -42,7 +42,7 @@ class StudentController extends Controller
 
     public function show(string $id): View
     {
-        $student = Student::find($id);
+        $student = Student::with(['enrollments.batch.course', 'enrollments.payments', 'payments'])->find($id);
         return view('students.show')->with('students', $student);
     }
 

@@ -24,11 +24,12 @@ class BatchController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $courses = Course::pluck('name', 'id');
-        // Trả về view tạo mới với danh sách khóa học
-        return view('batches.create',compact('courses'));
+        $selectedCourseId = $request->query('course_id');
+        // Trả về view tạo mới với danh sách khóa học và khóa học được chọn sẵn
+        return view('batches.create', compact('courses', 'selectedCourseId'));
     }
 
     /**
@@ -36,18 +37,15 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'course_id' => 'required|exists:courses,id',
+            'start_date' => 'required|date',
+        ]);
+        
         $input = $request->all();
-        // Xử lý course_id: nếu là số thì giữ nguyên, nếu là tên thì tìm ID
-        if (!empty($input['course_id']) && !is_numeric($input['course_id'])) {
-            $course = Course::where('name', $input['course_id'])->first();
-            $input['course_id'] = $course ? $course->id : null;
-        }
-        // Luôn chuyển đổi từ d/m/Y sang Y-m-d
-        if (!empty($input['start_date'])) {
-            $input['start_date'] = Carbon::createFromFormat('d/m/Y', $input['start_date'])->format('Y-m-d');
-        }
         Batch::create($input);
-        return redirect('batches')->with('flash_message', 'Batch Addedd!');
+        return redirect('batches')->with('flash_message', 'Lớp học đã được thêm thành công!');
     }
 
     /**
@@ -55,7 +53,7 @@ class BatchController extends Controller
      */
     public function show(string $id)
     {
-        $batches = Batch::find($id);
+        $batches = Batch::with(['course.teachers', 'enrollments.student', 'enrollments.payments'])->find($id);
         return view('batches.show')->with('batches', $batches);
     }
 
@@ -65,7 +63,8 @@ class BatchController extends Controller
     public function edit(string $id)
     {
         $batches = Batch::find($id);
-        return view('batches.edit')-> with('batches', $batches);
+        $courses = Course::pluck('name', 'id');
+        return view('batches.edit', compact('batches', 'courses'));
     }
 
     /**
@@ -73,19 +72,21 @@ class BatchController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'course_id' => 'required|exists:courses,id',
+            'start_date' => 'required|date',
+        ]);
+        
         $batches = Batch::find($id);
         $input = $request->all();
-        // Xử lý course_id: nếu là số thì giữ nguyên, nếu là tên thì tìm ID
-        if (!empty($input['course_id']) && !is_numeric($input['course_id'])) {
-            $course = Course::where('name', $input['course_id'])->first();
-            $input['course_id'] = $course ? $course->id : null;
-        }
-        // Luôn chuyển đổi từ d/m/Y sang Y-m-d
-        if (!empty($input['start_date'])) {
-            $input['start_date'] = Carbon::createFromFormat('d/m/Y', $input['start_date'])->format('Y-m-d');
-        }
+        
+        // Không cần xử lý course_id vì đã validate là exists:courses,id
+        
+        // Không cần xử lý start_date vì đã sử dụng input type="date"
+        
         $batches->update($input);
-        return redirect('batches')->with('flash_message', 'Batch Updated!');
+        return redirect('batches')->with('flash_message', 'Lớp học đã được cập nhật!');
     }
 
     /**
