@@ -18,7 +18,7 @@
                         <th>Enrollment No</th>
                         <th>Student</th>
                         <th>Course</th>
-                        <th>Batch</th>
+                        <th>Class</th>
                         <th>Join Date</th>
                         <th>Fees</th>
                         <th>Actions</th>

@@ -35,7 +35,7 @@
         </div>
         
         <div class="form-group mb-3">
-          <label>Batch</label>
+          <label>Class</label>
           <select name="batch_id" id="batch_id" class="form-control">
             <option value="">Select Batch</option>
             @foreach($batches as $id => $name)

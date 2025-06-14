@@ -21,7 +21,7 @@
           <select name="enrollment_id" class="form-control">
               <option value="">Select Student Enrollment</option>
               @foreach($enrollments as $id => $text)
-                  <option value="{{ $id }}">{{ $text }}</option>
+                  <option value="{{ $id }}" {{ isset($selectedEnrollmentId) && $selectedEnrollmentId == $id ? 'selected' : '' }}>{{ $text }}</option>
               @endforeach
           </select>
         </div>

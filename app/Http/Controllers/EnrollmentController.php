@@ -61,8 +61,8 @@ class EnrollmentController extends Controller
      */
     public function show(string $id): View
     {
-        $enrollment = Enrollment::with(['student', 'batch.course'])->find($id);
-        return view('enrollments.show')->with('enrollments', $enrollment);
+        $enrollment = Enrollment::with(['student', 'batch.course', 'payments'])->find($id);
+        return view('enrollments.show')->with('enrollment', $enrollment);
     }
 
     /**

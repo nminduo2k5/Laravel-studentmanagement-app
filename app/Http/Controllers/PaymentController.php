@@ -23,7 +23,7 @@ class PaymentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
         $enrollments = Enrollment::with('student', 'batch')
             ->get()
@@ -34,7 +34,10 @@ class PaymentController extends Controller
                 ];
             })
             ->pluck('text', 'id');
-        return view('payments.create', compact('enrollments'));
+            
+        $selectedEnrollmentId = $request->query('enrollment_id');
+        
+        return view('payments.create', compact('enrollments', 'selectedEnrollmentId'));
     }
 
     /**
@@ -58,7 +61,7 @@ class PaymentController extends Controller
     public function show(string $id): View
     {
         $payment = Payment::with('enrollment.student', 'enrollment.batch')->find($id);
-        return view('payments.show')->with('payments', $payment);
+        return view('payments.show')->with('payment', $payment);
     }
 
     /**
