@@ -214,9 +214,9 @@ Dự án này được phân phối dưới giấy phép MIT. Xem file `LICENSE`
 
 ## Liên hệ
 
-- **Tác giả**: Your Name
-- **Email**: your.email@example.com
-- **GitHub**: [Your GitHub Profile](https://github.com/yourusername)
+- **Tác giả**: Nguyễn Minh Dương
+- **Email**: 23010441@st.phenikaa-uni.edu.vn
+- **GitHub**: [Your GitHub Profile](https://github.com/nminduo2k5)
 
 ## Lời cảm ơn
 

@@ -16,8 +16,8 @@ class CourseController extends Controller
 
     public function index(): View
     {
-        $Course = Course::all();
-        return view ('courses.index')->with('courses', $Course);
+        $courses = Course::all();
+        return view ('courses.index')->with('courses', $courses);
     }
 
  
@@ -44,15 +44,15 @@ class CourseController extends Controller
 
     public function edit(string $id): View
     {
-        $Course = Course::find($id);
-        return view('courses.edit')->with('courses', $Course);
+        $course = Course::find($id);
+        return view('courses.edit')->with('courses', $course);
     }
 
     public function update(Request $request, string $id): RedirectResponse
     {
-        $Course = Course::find($id);
+        $course = Course::find($id);
         $input = $request->all();
-        $Course->update($input);
+        $course->update($input);
         return redirect('courses')->with('flash_message', 'courses Updated!');  
     }
 
