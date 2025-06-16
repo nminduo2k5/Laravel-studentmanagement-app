@@ -18,26 +18,13 @@ Route::get('/layout', function () {
 
 // ==================== Các route dành cho khách (chưa đăng nhập) ====================
 // Chỉ truy cập được khi chưa đăng nhập (guest)
-Route::middleware('guest')->group(function () {
-    // Hiển thị form đăng ký
-    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-    // Xử lý đăng ký
-    Route::post('/register', [AuthController::class, 'register']);
-    // Hiển thị form đăng nhập
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    // Xử lý đăng nhập
-    Route::post('/login', [AuthController::class, 'login']);
-});
+// Các route xác thực được xử lý tự động bởi Laravel Fortify
 
 // ==================== Các route yêu cầu đăng nhập ====================
 // Chỉ truy cập được khi đã đăng nhập (auth)
 Route::middleware('auth')->group(function () {
-    // Đăng xuất
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    // Xem thông tin cá nhân
+    // Xem thông tin cá nhân (Fortify xử lý đăng xuất và cập nhật thông tin)
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-    // Cập nhật thông tin cá nhân
-    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
 
     // ==================== Các route resource (CRUD) ====================
     // Quản lý sinh viên, giáo viên, khóa học, lớp, ghi danh, thanh toán
@@ -58,4 +45,11 @@ Route::middleware('auth')->group(function () {
     // ==================== Các route quản lý điểm số của sinh viên ====================
     Route::get('/enrollments/{enrollment}/grades', [EnrollmentController::class, 'showGradeForm'])->name('enrollments.grades.form');
     Route::post('/enrollments/{enrollment}/grades', [EnrollmentController::class, 'saveGrades'])->name('enrollments.grades.save');
+    
+    // ==================== Các route quản lý GPA của sinh viên ====================
+    Route::get('/students/gpa', [StudentGpaController::class, 'index'])->name('students.gpa');
+    Route::get('/students/update-all-gpa', [StudentGpaController::class, 'updateAllGPA'])->name('students.update-all-gpa');
+    
+    // ==================== Cập nhật GPA của sinh viên ====================
+    Route::get('/students/update-gpa', [StudentController::class, 'updateAllGPA'])->name('students.update-gpa');
 });
