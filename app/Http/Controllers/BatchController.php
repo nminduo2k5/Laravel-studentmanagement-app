@@ -45,7 +45,7 @@ class BatchController extends Controller
         
         $input = $request->all();
         Batch::create($input);
-        return redirect('batches')->with('flash_message', 'Lớp học đã được thêm thành công!');
+        return redirect('batches')->with('flash_message', 'New Class has been created!');
     }
 
     /**
@@ -86,7 +86,7 @@ class BatchController extends Controller
         // Không cần xử lý start_date vì đã sử dụng input type="date"
         
         $batches->update($input);
-        return redirect('batches')->with('flash_message', 'Lớp học đã được cập nhật!');
+        return redirect('batches')->with('flash_message', 'Class updated successfully!');
     }
 
     /**
@@ -95,6 +95,6 @@ class BatchController extends Controller
     public function destroy(string $id)
     {
         Batch::destroy($id);
-        return redirect('batches')->with('flash_message', 'Batch deleted!');
+        return redirect('batches')->with('flash_message', 'Class deleted!');
     }
 }

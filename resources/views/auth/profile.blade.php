@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card mt-5">
-            <div class="card-header"><h4>Thông tin tài khoản</h4></div>
+            <div class="card-header"><h4>Account Details</h4></div>
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -21,14 +21,14 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <label class="form-label">Họ tên</label>
+                        <label class="form-label">Full Name</label>
                         <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Cập nhật</button>
+                    <button type="submit" class="btn btn-primary w-100">Update</button>
                 </form>
             </div>
         </div>

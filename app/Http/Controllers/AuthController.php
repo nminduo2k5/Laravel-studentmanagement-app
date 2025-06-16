@@ -30,7 +30,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
+        return redirect()->route('login')->with('success', 'Register successful! Please log in.');
     }
 
     // Hiển thị form đăng nhập
@@ -49,11 +49,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'))->with('success', 'Đăng nhập thành công!');
+            return redirect()->intended(route('dashboard'))->with('success', 'Login successful!');
         }
 
         return back()->withErrors([
-            'email' => 'Email hoặc mật khẩu không đúng.',
+            'email' => 'Invalid email or password.',
         ])->onlyInput('email');
     }
 
@@ -63,7 +63,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')->with('success', 'Đăng xuất thành công!');
+        return redirect()->route('login')->with('success', 'Logout successful!');
     }
     
     // Hiển thị hồ sơ người dùng
@@ -87,7 +87,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
         ]);
-        
-        return redirect()->route('profile')->with('success', 'Hồ sơ đã được cập nhật thành công!');
+
+        return redirect()->route('profile')->with('success', 'Profile updated successfully!');
     }
 }

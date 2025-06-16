@@ -20,14 +20,14 @@
       {!! csrf_field() !!}
       
       <div class="mb-3">
-        <label for="name" class="form-label">Tên lớp học</label>
+        <label for="name" class="form-label">Class Name</label>
         <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required>
       </div>
       
       <div class="mb-3">
-        <label for="course_id" class="form-label">Khóa học</label>
+        <label for="course_id" class="form-label">Course</label>
         <select name="course_id" id="course_id" class="form-control" required>
-          <option value="">-- Chọn khóa học --</option>
+          <option value="">-- Select Course --</option>
           @foreach($courses as $id => $name)
             <option value="{{ $id }}" {{ isset($selectedCourseId) && $selectedCourseId == $id ? 'selected' : '' }}>{{ $name }}</option>
           @endforeach
@@ -35,16 +35,16 @@
       </div>
       
       <div class="mb-3">
-        <label for="start_date" class="form-label">Ngày bắt đầu</label>
+        <label for="start_date" class="form-label">Start Date</label>
         <input type="date" name="start_date" id="start_date" value="{{ old('start_date', date('Y-m-d')) }}" class="form-control" required>
       </div>
       
       <div class="d-flex gap-2">
         <a href="{{ url('/batches') }}" class="btn btn-secondary">
-          <i class="bi bi-arrow-left"></i> Quay lại
+          <i class="bi bi-arrow-left"></i> Back
         </a>
         <button type="submit" class="btn btn-success">
-          <i class="bi bi-save"></i> Lưu
+          <i class="bi bi-save"></i> Save
         </button>
       </div>
     </form>

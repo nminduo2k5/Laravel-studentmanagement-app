@@ -1,16 +1,5 @@
 <?php
-/**
- * StudentController - Quản lý các thao tác CRUD cho sinh viên
- * 
- * Controller này xử lý tất cả các thao tác liên quan đến sinh viên như:
- * - Hiển thị danh sách sinh viên
- * - Tạo sinh viên mới
- * - Hiển thị thông tin chi tiết sinh viên
- * - Cập nhật thông tin sinh viên
- * - Xóa sinh viên
- * 
- * @package App\Http\Controllers
- */
+
 
 namespace App\Http\Controllers;
 

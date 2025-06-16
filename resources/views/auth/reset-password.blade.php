@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card mt-5">
-            <div class="card-header"><h4>Đặt lại mật khẩu</h4></div>
+            <div class="card-header"><h4>Reset password</h4></div>
             <div class="card-body">
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
@@ -16,17 +16,17 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Mật khẩu mới</label>
+                        <label for="password" class="form-label">New password</label>
                         <input id="password" type="password" class="form-control" name="password" required>
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="password_confirmation" class="form-label">Xác nhận mật khẩu</label>
+                        <label for="password_confirmation" class="form-label">Confirm password</label>
                         <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Đặt lại mật khẩu</button>
+                    <button type="submit" class="btn btn-primary w-100">Reset password</button>
                 </form>
             </div>
         </div>

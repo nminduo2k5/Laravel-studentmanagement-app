@@ -43,7 +43,7 @@
                                                 <small>({{ $item->getGradeStatus() }})</small>
                                             </span>
                                         @else
-                                            <span class="badge bg-secondary px-3 py-2">Chưa có điểm</span>
+                                            <span class="badge bg-secondary px-3 py-2">No grades</span>
                                         @endif
                                     </td>
                                     <td class="text-nowrap">

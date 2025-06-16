@@ -46,12 +46,12 @@ class Enrollment extends Model
     public function getGradeStatus(): string
     {
         if (isset($this->total_grade)) {
-            if ($this->total_grade >= 8.5) return 'Xuất sắc';
-            if ($this->total_grade >= 7.0) return 'Giỏi';
-            if ($this->total_grade >= 5.5) return 'Khá';
-            if ($this->total_grade >= 4.0) return 'Trung bình';
-            return 'Không đạt';
+            if ($this->total_grade >= 8.5) return 'Excellent';
+            if ($this->total_grade >= 7.0) return 'Good';
+            if ($this->total_grade >= 5.5) return 'Fair';
+            if ($this->total_grade >= 4.0) return 'Average';
+            return 'Fail';
         }
-        return 'Chưa có điểm';
+        return 'N/A';
     }
 }

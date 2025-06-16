@@ -1,14 +1,5 @@
 <?php
-/**
- * TeacherCourseController - Quản lý mối quan hệ giữa giáo viên và khóa học
- * 
- * Controller này xử lý các thao tác liên quan đến mối quan hệ nhiều-nhiều giữa giáo viên và khóa học:
- * - Hiển thị form gán giáo viên cho khóa học
- * - Lưu việc gán giáo viên cho khóa học
- * - Hiển thị danh sách khóa học của một giáo viên
- * 
- * @package App\Http\Controllers
- */
+
 
 namespace App\Http\Controllers;
 
@@ -98,16 +89,7 @@ class TeacherCourseController extends Controller
                          ->with('flash_message', 'Teachers have been assigned to the course!');
     }
     
-    /**
-     * Hiển thị các khóa học của một giáo viên
-     * 
-     * Phương thức này lấy thông tin giáo viên và các khóa học liên quan,
-     * tính toán số lượng lớp học và sinh viên để hiển thị trang chi tiết
-     * 
-     * @param string $teacherId ID của giáo viên
-     * @return \Illuminate\View\View View hiển thị danh sách khóa học của giáo viên
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException Nếu không tìm thấy giáo viên
-     */
+    
     public function teacherCourses(string $teacherId): View
     {
         // Tìm giáo viên theo ID và eager loading các quan hệ liên quan

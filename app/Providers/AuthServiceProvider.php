@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Gate;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * The model to policy mappings for the application.
+     * Ánh xạ các model với policy tương ứng trong ứng dụng.
      *
      * @var array<class-string, class-string>
      */
@@ -17,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register any authentication / authorization services.
+     * Đăng ký các dịch vụ xác thực và phân quyền.
      */
     public function boot(): void
     {

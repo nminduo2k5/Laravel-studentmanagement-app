@@ -153,14 +153,14 @@
     
     <div class="card mb-4">
       <div class="card-header bg-warning text-dark">
-        <h5 class="mb-0">Điểm số</h5>
+        <h5 class="mb-0">Grade Information</h5>
       </div>
       <div class="card-body">
         @if(isset($enrollment->midterm_grade) || isset($enrollment->final_grade) || isset($enrollment->assignment_grade))
           <div class="row">
             <div class="col-md-4">
               <div class="card border-primary mb-3">
-                <div class="card-header bg-primary text-white text-center">Điểm giữa kỳ (30%)</div>
+                <div class="card-header bg-primary text-white text-center">Midterm Exam (30%)</div>
                 <div class="card-body text-center">
                   <h3 class="mb-0">{{ isset($enrollment->midterm_grade) ? number_format($enrollment->midterm_grade, 1) : 'N/A' }}</h3>
                 </div>
@@ -169,7 +169,7 @@
             
             <div class="col-md-4">
               <div class="card border-danger mb-3">
-                <div class="card-header bg-danger text-white text-center">Điểm cuối kỳ (50%)</div>
+                <div class="card-header bg-danger text-white text-center">Final Exam (50%)</div>
                 <div class="card-body text-center">
                   <h3 class="mb-0">{{ isset($enrollment->final_grade) ? number_format($enrollment->final_grade, 1) : 'N/A' }}</h3>
                 </div>
@@ -178,7 +178,7 @@
             
             <div class="col-md-4">
               <div class="card border-success mb-3">
-                <div class="card-header bg-success text-white text-center">Điểm bài tập (20%)</div>
+                <div class="card-header bg-success text-white text-center">Assignment (20%)</div>
                 <div class="card-body text-center">
                   <h3 class="mb-0">{{ isset($enrollment->assignment_grade) ? number_format($enrollment->assignment_grade, 1) : 'N/A' }}</h3>
                 </div>
@@ -191,7 +191,7 @@
             <div class="col-md-8">
               <div class="card border-info">
                 <div class="card-header bg-info text-white">
-                  <h5 class="mb-0">Kết quả học tập</h5>
+                  <h5 class="mb-0">Grade Information</h5>
                 </div>
                 <div class="card-body">
                   <div class="row">
@@ -201,7 +201,7 @@
                           <div class="display-4 fw-bold">{{ number_format($enrollment->total_grade, 1) }}</div>
                         </div>
                         <div>
-                          <h5 class="mb-1">Điểm tổng kết</h5>
+                          <h5 class="mb-1">Total Grade</h5>
                           <div class="badge bg-{{ $enrollment->total_grade >= 8.5 ? 'success' : ($enrollment->total_grade >= 7.0 ? 'primary' : ($enrollment->total_grade >= 5.5 ? 'info' : ($enrollment->total_grade >= 4.0 ? 'warning' : 'danger'))) }} fs-6">
                             {{ $enrollment->getGradeStatus() }}
                           </div>
@@ -225,26 +225,26 @@
                     <div class="col-md-6">
                       <div class="card bg-light">
                         <div class="card-body p-3">
-                          <h6 class="card-title">Thang điểm đánh giá</h6>
+                          <h6 class="card-title">Grading Scale</h6>
                           <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center p-2">
-                              Xuất sắc
+                              Excellent
                               <span class="badge bg-success rounded-pill">8.5 - 10</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-2">
-                              Giỏi
+                              Good
                               <span class="badge bg-primary rounded-pill">7.0 - 8.4</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-2">
-                              Khá
+                              Fair
                               <span class="badge bg-info rounded-pill">5.5 - 6.9</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-2">
-                              Trung bình
+                              Average
                               <span class="badge bg-warning rounded-pill">4.0 - 5.4</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center p-2">
-                              Không đạt
+                              Fail
                               <span class="badge bg-danger rounded-pill">0 - 3.9</span>
                             </li>
                           </ul>
@@ -254,20 +254,19 @@
                   </div>
                 </div>
               </div>
-            </div>
             
             <div class="col-md-4">
               <div class="card border-secondary h-100">
                 <div class="card-header bg-secondary text-white">
-                  <h5 class="mb-0">Thao tác</h5>
+                  <h5 class="mb-0">Actions</h5>
                 </div>
                 <div class="card-body d-flex flex-column justify-content-between">
                   <div>
-                    <p class="text-muted">Cập nhật điểm số và nhận xét cho sinh viên</p>
+                    <p class="text-muted">Update grades and remarks for the student</p>
                   </div>
                   <div class="mt-3">
                     <a href="{{ route('enrollments.grades.form', $enrollment->id) }}" class="btn btn-warning w-100">
-                      <i class="bi bi-pencil-square me-2"></i> Cập nhật điểm
+                      <i class="bi bi-pencil-square me-2"></i> Update Grades
                     </a>
                   </div>
                 </div>
@@ -279,7 +278,7 @@
           @if(isset($enrollment->grade_remarks))
           <div class="card mt-4">
             <div class="card-header bg-secondary text-white">
-              <h5 class="mb-0"><i class="bi bi-chat-quote me-2"></i>Nhận xét của giáo viên</h5>
+              <h5 class="mb-0"><i class="bi bi-chat-quote me-2"></i>Teacher's Remarks</h5>
             </div>
             <div class="card-body">
               <div class="border-start border-4 border-info ps-3 py-2">
@@ -291,9 +290,9 @@
         @else
           <div class="alert alert-info">
             <div class="d-flex justify-content-between align-items-center">
-              <span><i class="bi bi-info-circle me-2"></i> Chưa có thông tin điểm số cho sinh viên này.</span>
+              <span><i class="bi bi-info-circle me-2"></i> No grade information available for this student.</span>
               <a href="{{ route('enrollments.grades.form', $enrollment->id) }}" class="btn btn-warning">
-                <i class="bi bi-plus-circle me-2"></i> Nhập điểm
+                <i class="bi bi-plus-circle me-2"></i> Enter Grades
               </a>
             </div>
           </div>
@@ -312,7 +311,7 @@
         <i class="bi bi-plus-circle"></i> Add Payment
       </a>
       <a href="{{ route('enrollments.grades.form', $enrollment->id) }}" class="btn btn-warning">
-        <i class="bi bi-journal-check"></i> Nhập điểm
+        <i class="bi bi-journal-check"></i> Enter Grades
       </a>
       @if($enrollment->student)
       <a href="{{ url('/students/' . $enrollment->student->id) }}" class="btn btn-info">

@@ -1,10 +1,6 @@
 <?php
 /**
  * Model Student - Quản lý thông tin sinh viên
- * 
- * Model này đại diện cho một sinh viên trong hệ thống quản lý sinh viên.
- * Nó chứa thông tin cá nhân của sinh viên và các mối quan hệ với các bảng khác.
- * 
  * @package App\Models
  */
 
@@ -17,26 +13,12 @@ class Student extends Model
 {
     use HasFactory;
 
-    /**
-     * Tên bảng trong cơ sở dữ liệu
-     * @var string
-     */
     protected $table = 'students';
-
-    /**
-     * Khóa chính của bảng
-     * @var string
-     */
     protected $primaryKey = 'id';
-
-    /**
-     * Các trường có thể gán hàng loạt
-     * @var array
-     */
     protected $fillable = ['name', 'address', 'mobile', 'gpa'];
 
     /**
-     * Một sinh viên có nhiều đăng ký học
+     * Lấy danh sách đăng ký học của sinh viên
      */
     public function enrollments()
     {
@@ -44,7 +26,7 @@ class Student extends Model
     }
 
     /**
-     * Một sinh viên có nhiều thanh toán thông qua các đăng ký
+     * Lấy lịch sử thanh toán của sinh viên
      */
     public function payments()
     {
@@ -52,7 +34,7 @@ class Student extends Model
     }
 
     /**
-     * Một sinh viên đăng ký nhiều lớp học (nhiều-nhiều)
+     * Lấy các lớp học sinh viên đã đăng ký
      */
     public function batches()
     {
@@ -60,7 +42,7 @@ class Student extends Model
     }
 
     /**
-     * Lấy tất cả các khóa học mà sinh viên đã đăng ký
+     * Lấy các khóa học sinh viên đã tham gia
      */
     public function courses()
     {

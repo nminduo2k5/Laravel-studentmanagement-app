@@ -46,10 +46,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/enrollments/{enrollment}/grades', [EnrollmentController::class, 'showGradeForm'])->name('enrollments.grades.form');
     Route::post('/enrollments/{enrollment}/grades', [EnrollmentController::class, 'saveGrades'])->name('enrollments.grades.save');
     
-    // ==================== Các route quản lý GPA của sinh viên ====================
-    Route::get('/students/gpa', [StudentGpaController::class, 'index'])->name('students.gpa');
-    Route::get('/students/update-all-gpa', [StudentGpaController::class, 'updateAllGPA'])->name('students.update-all-gpa');
-    
-    // ==================== Cập nhật GPA của sinh viên ====================
-    Route::get('/students/update-gpa', [StudentController::class, 'updateAllGPA'])->name('students.update-gpa');
+
 });

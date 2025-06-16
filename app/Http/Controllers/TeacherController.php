@@ -40,7 +40,7 @@ class TeacherController extends Controller
         ]);
         
         $teacher = Teacher::create($validated);
-        return redirect('teachers')->with('flash_message', 'Giáo viên đã được thêm thành công!');
+        return redirect('teachers')->with('flash_message', 'New Teacher has been created!');
     }
 
     public function show(string $id): View
@@ -75,13 +75,13 @@ class TeacherController extends Controller
         
         $teacher = Teacher::find($id);
         $teacher->update($validated);
-        return redirect('teachers')->with('flash_message', 'Thông tin giáo viên đã được cập nhật!');  
+        return redirect('teachers')->with('flash_message', 'Teacher updated successfully!');  
     }
 
     
     public function destroy(string $id): RedirectResponse
     {
         Teacher::destroy($id);
-        return redirect('teachers')->with('flash_message', 'Teacher deleted!'); 
+        return redirect('teachers')->with('flash_message', 'Teacher deleted successfully!');
     }
 }

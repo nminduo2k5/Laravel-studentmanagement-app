@@ -1,14 +1,4 @@
 <?php
-/**
- * DashboardController - Quản lý hiển thị trang tổng quan (Dashboard)
- * 
- * Controller này xử lý việc hiển thị trang tổng quan của hệ thống, bao gồm:
- * - Thống kê số lượng sinh viên, giáo viên, khóa học, lớp học, đăng ký và thanh toán
- * - Tính toán tổng doanh thu
- * - Hiển thị các biểu đồ và thông tin tổng quan khác
- * 
- * @package App\Http\Controllers
- */
 
 namespace App\Http\Controllers;
 
@@ -77,11 +67,5 @@ class DashboardController extends Controller
         ));
     }
     
-    /**
-     * Có thể thêm các phương thức khác ở đây để xử lý các chức năng khác của dashboard
-     * Ví dụ:
-     * - getRevenueChart(): Lấy dữ liệu cho biểu đồ doanh thu
-     * - getStudentStatistics(): Lấy thống kê chi tiết về sinh viên
-     * - getRecentActivities(): Lấy danh sách các hoạt động gần đây
-     */
+  
 }

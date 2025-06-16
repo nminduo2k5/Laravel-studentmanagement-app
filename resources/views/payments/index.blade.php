@@ -14,25 +14,25 @@
             <table class="table ">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Student</th>
-                        <th>Course</th>
-                        <th>Batch</th>
-                        <th>Payment Date</th>
-                        <th>Amount</th>
-                        <th>Actions</th>
+                        <th class="text-nowrap">#</th>
+                        <th class="text-nowrap">Student</th>
+                        <th class="text-nowrap">Course</th>
+                        <th class="text-nowrap">Batch</th>
+                        <th class="text-nowrap">Payment Date</th>
+                        <th class="text-nowrap">Amount</th>
+                        <th class="text-nowrap">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 @foreach($payments as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->enrollment && $item->enrollment->student ? $item->enrollment->student->name : 'N/A' }}</td>
-                        <td>{{ $item->enrollment && $item->enrollment->batch && $item->enrollment->batch->course ? $item->enrollment->batch->course->name : 'N/A' }}</td>
-                        <td>{{ $item->enrollment && $item->enrollment->batch ? $item->enrollment->batch->name : 'N/A' }}</td>
-                        <td>{{ date('d-m-Y', strtotime($item->payment_date)) }}</td>
-                        <td>{{ number_format($item->amount, 2) }}</td>
-                        <td>
+                        <td class="text-nowrap">{{ $loop->iteration }}</td>
+                        <td class="text-nowrap">{{ $item->enrollment && $item->enrollment->student ? $item->enrollment->student->name : 'N/A' }}</td>
+                        <td class="text-nowrap">{{ $item->enrollment && $item->enrollment->batch && $item->enrollment->batch->course ? $item->enrollment->batch->course->name : 'N/A' }}</td>
+                        <td class="text-nowrap">{{ $item->enrollment && $item->enrollment->batch ? $item->enrollment->batch->name : 'N/A' }}</td>
+                        <td class="text-nowrap">{{ date('d-m-Y', strtotime($item->payment_date)) }}</td>
+                        <td class="text-nowrap">{{ number_format($item->amount, 2) }}</td>
+                        <td class="text-nowrap">
                             <a href="{{ url('/payments/' . $item->id) }}" title="View Payment"><button class="btn btn-info btn-sm"><i class="bi bi-eye"></i> View</button></a>
                             <a href="{{ url('/payments/' . $item->id . '/edit') }}" title="Edit Payment"><button class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</button></a>
                             <form method="POST" action="{{ url('/payments' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">

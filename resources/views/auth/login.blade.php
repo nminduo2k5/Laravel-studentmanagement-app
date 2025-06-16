@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card mt-5">
-            <div class="card-header"><h4>Đăng nhập</h4></div>
+            <div class="card-header"><h4>Login</h4></div>
             <div class="card-body">
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
@@ -24,19 +24,19 @@
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Mật khẩu</label>
+                        <label for="password" class="form-label">Password</label>
                         <input id="password" type="password" class="form-control" name="password" required>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                        <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+                        <label class="form-check-label" for="remember">Remember me</label>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
                 <div class="mt-3 text-center">
-                    Chưa có tài khoản? <a href="{{ route('register') }}">Đăng ký</a>
+                    Don't have an account? <a href="{{ route('register') }}">Register</a>
                     <br>
-                    <a href="{{ route('password.request') }}">Quên mật khẩu?</a>
+                    <a href="{{ route('password.request') }}">Forgot password?</a>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card mt-5">
-            <div class="card-header"><h4>Quên mật khẩu</h4></div>
+            <div class="card-header"><h4>Forgot password</h4></div>
             <div class="card-body">
                 @if (session('status'))
                     <div class="alert alert-success">{{ session('status') }}</div>
@@ -17,10 +17,10 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Gửi link đặt lại mật khẩu</button>
+                    <button type="submit" class="btn btn-primary w-100">Send password reset link</button>
                 </form>
                 <div class="mt-3 text-center">
-                    <a href="{{ route('login') }}">Quay lại đăng nhập</a>
+                    <a href="{{ route('login') }}">Back to login</a>
                 </div>
             </div>
         </div>
