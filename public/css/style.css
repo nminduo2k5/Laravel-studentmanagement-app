@@ -71,8 +71,7 @@ div.content {
     margin-left: calc(var(--sidebar-width) + 10px); /* tăng khoảng cách một chút */
     padding: 32px 40px 40px 40px; /* padding lớn hơn cho thoáng */
     min-height: 120vh; /* tăng chiều dài tối thiểu */
-    max-width: 1400px; /* giới hạn chiều rộng tối đa để không quá rộng trên màn hình lớn */
-    width: 100%;
+    width: auto; /* chiều rộng tự động */
     margin-right: auto;
     margin-bottom: 40px;
     margin-top: 0;
@@ -272,7 +271,7 @@ body.dark-mode .text-dark {
 }
 
 body.dark-mode .bg-light {
-    background-color: #1a1a2e !important;
+    background-color: #1a2a2e !important;
 }
 
 /* ==================== Liên kết trong navbar ==================== */

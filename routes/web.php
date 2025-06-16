@@ -54,4 +54,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses/{course}/assign-teachers', [App\Http\Controllers\TeacherCourseController::class, 'assignForm'])->name('courses.assign.teachers.form');
     Route::post('/courses/{course}/assign-teachers', [App\Http\Controllers\TeacherCourseController::class, 'assign'])->name('courses.assign.teachers');
     Route::get('/teachers/{teacher}/courses', [App\Http\Controllers\TeacherCourseController::class, 'teacherCourses'])->name('teachers.courses');
+    
+    // ==================== Các route quản lý điểm số của sinh viên ====================
+    Route::get('/enrollments/{enrollment}/grades', [EnrollmentController::class, 'showGradeForm'])->name('enrollments.grades.form');
+    Route::post('/enrollments/{enrollment}/grades', [EnrollmentController::class, 'saveGrades'])->name('enrollments.grades.save');
 });

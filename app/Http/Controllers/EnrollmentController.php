@@ -50,7 +50,19 @@ class EnrollmentController extends Controller
             'student_id' => 'required|exists:students,id',
             'join_date' => 'required|date',
             'fees' => 'required|numeric|min:0',
+            'midterm_grade' => 'nullable|numeric|min:0|max:10',
+            'final_grade' => 'nullable|numeric|min:0|max:10',
+            'assignment_grade' => 'nullable|numeric|min:0|max:10',
+            'grade_remarks' => 'nullable|string',
         ]);
+        
+        // Calculate total grade if all components are present
+        if (isset($validated['midterm_grade']) && isset($validated['final_grade']) && isset($validated['assignment_grade'])) {
+            $validated['total_grade'] = 
+                ($validated['midterm_grade'] * 0.3) + 
+                ($validated['final_grade'] * 0.5) + 
+                ($validated['assignment_grade'] * 0.2);
+        }
         
         Enrollment::create($validated);
         return redirect('enrollments')->with('flash_message', 'Enrollment Added!');
@@ -95,7 +107,19 @@ class EnrollmentController extends Controller
             'student_id' => 'required|exists:students,id',
             'join_date' => 'required|date',
             'fees' => 'required|numeric|min:0',
+            'midterm_grade' => 'nullable|numeric|min:0|max:10',
+            'final_grade' => 'nullable|numeric|min:0|max:10',
+            'assignment_grade' => 'nullable|numeric|min:0|max:10',
+            'grade_remarks' => 'nullable|string',
         ]);
+        
+        // Calculate total grade if all components are present
+        if (isset($validated['midterm_grade']) && isset($validated['final_grade']) && isset($validated['assignment_grade'])) {
+            $validated['total_grade'] = 
+                ($validated['midterm_grade'] * 0.3) + 
+                ($validated['final_grade'] * 0.5) + 
+                ($validated['assignment_grade'] * 0.2);
+        }
         
         $enrollment = Enrollment::find($id);
         $enrollment->update($validated);
@@ -109,5 +133,40 @@ class EnrollmentController extends Controller
     {
         Enrollment::destroy($id);
         return redirect('enrollments')->with('flash_message', 'Enrollment deleted!');
+    }
+    
+    /**
+     * Show form for entering grades for a student enrollment.
+     */
+    public function showGradeForm(string $id): View
+    {
+        $enrollment = Enrollment::with(['student', 'batch.course'])->find($id);
+        return view('enrollments.grades', compact('enrollment'));
+    }
+    
+    /**
+     * Save grades for a student enrollment.
+     */
+    public function saveGrades(Request $request, string $id): RedirectResponse
+    {
+        $validated = $request->validate([
+            'midterm_grade' => 'nullable|numeric|min:0|max:10',
+            'final_grade' => 'nullable|numeric|min:0|max:10',
+            'assignment_grade' => 'nullable|numeric|min:0|max:10',
+            'grade_remarks' => 'nullable|string',
+        ]);
+        
+        $enrollment = Enrollment::find($id);
+        
+        // Calculate total grade if all components are present
+        if (isset($validated['midterm_grade']) && isset($validated['final_grade']) && isset($validated['assignment_grade'])) {
+            $validated['total_grade'] = 
+                ($validated['midterm_grade'] * 0.3) + 
+                ($validated['final_grade'] * 0.5) + 
+                ($validated['assignment_grade'] * 0.2);
+        }
+        
+        $enrollment->update($validated);
+        return redirect()->route('enrollments.show', $id)->with('flash_message', 'Điểm số đã được cập nhật!');
     }
 }
