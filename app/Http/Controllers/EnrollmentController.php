@@ -64,7 +64,13 @@ class EnrollmentController extends Controller
                 ($validated['assignment_grade'] * 0.2);
         }
         
-        Enrollment::create($validated);
+        $enrollment = Enrollment::create($validated);
+        
+        // Tự động tính lại GPA cho sinh viên nếu có điểm
+        if (isset($validated['total_grade'])) {
+            $enrollment->student->calculateGPA();
+        }
+        
         return redirect('enrollments')->with('flash_message', 'Enrollment Added!');
     }
 
@@ -123,6 +129,10 @@ class EnrollmentController extends Controller
         
         $enrollment = Enrollment::find($id);
         $enrollment->update($validated);
+        
+        // Tự động tính lại GPA cho sinh viên
+        $enrollment->student->calculateGPA();
+        
         return redirect('enrollments')->with('flash_message', 'Enrollment Updated!');
     }
 
@@ -167,6 +177,10 @@ class EnrollmentController extends Controller
         }
         
         $enrollment->update($validated);
+        
+        // Tự động tính lại GPA cho sinh viên
+        $enrollment->student->calculateGPA();
+        
         return redirect()->route('enrollments.show', $id)->with('flash_message', 'Điểm số đã được cập nhật!');
     }
 }

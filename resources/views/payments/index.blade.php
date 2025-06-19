@@ -17,7 +17,7 @@
                         <th class="text-nowrap">#</th>
                         <th class="text-nowrap">Student</th>
                         <th class="text-nowrap">Course</th>
-                        <th class="text-nowrap">Batch</th>
+                        <th class="text-nowrap">Class</th>
                         <th class="text-nowrap">Payment Date</th>
                         <th class="text-nowrap">Amount</th>
                         <th class="text-nowrap">Actions</th>

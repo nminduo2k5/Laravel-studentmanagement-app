@@ -19,7 +19,7 @@
                                     <th class="text-nowrap">Enrollment No</th>
                                     <th class="text-nowrap">Student</th>
                                     <th class="text-nowrap">Course</th>
-                                    <th class="text-nowrap">Batch</th>
+                                    <th class="text-nowrap">Class</th>
                                     <th class="text-nowrap">Join Date</th>
                                     <th class="text-nowrap">Fee</th>
                                     <th class="text-nowrap">Grades</th>

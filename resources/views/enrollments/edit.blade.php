@@ -37,7 +37,7 @@
         <div class="form-group mb-3">
           <label>Class</label>
           <select name="batch_id" id="batch_id" class="form-control">
-            <option value="">Select Batch</option>
+            <option value="">Select Class</option>
             @foreach($batches as $id => $name)
               <option value="{{ $id }}" {{ old('batch_id', $enrollment->batch_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
             @endforeach

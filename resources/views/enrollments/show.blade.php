@@ -76,7 +76,7 @@
       <div class="col-md-4">
         <div class="card h-100">
           <div class="card-header bg-success text-white">
-            <h5 class="mb-0">Course Information</h5>
+            <h5 class="mb-0">Class Information</h5>
           </div>
           <div class="card-body">
             @if($enrollment->batch && $enrollment->batch->course)

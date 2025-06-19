@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Đăng ký Observer
+        \App\Models\Enrollment::observe(\App\Observers\EnrollmentObserver::class);
+        
         Fortify::loginView(function () {
             return view('auth.login');
         });
