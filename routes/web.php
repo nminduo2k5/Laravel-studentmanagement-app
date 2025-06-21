@@ -25,6 +25,7 @@ Route::get('/layout', function () {
 Route::middleware('auth')->group(function () {
     // Xem thông tin cá nhân (Fortify xử lý đăng xuất và cập nhật thông tin)
     Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
 
     // ==================== Các route resource (CRUD) ====================
     // Quản lý sinh viên, giáo viên, khóa học, lớp, ghi danh, thanh toán
