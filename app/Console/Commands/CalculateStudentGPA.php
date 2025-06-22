@@ -8,7 +8,7 @@ use App\Models\Student;
 class CalculateStudentGPA extends Command
 {
     protected $signature = 'student:calculate-gpa {student_id?}';
-    protected $description = 'Tính lại GPA cho sinh viên từ điểm enrollment';
+    protected $description = 'Recalculate GPA for a specific student or all students';
 
     public function handle()
     {
@@ -18,20 +18,20 @@ class CalculateStudentGPA extends Command
             $student = Student::find($studentId);
             if ($student) {
                 $gpa = $student->calculateGPA();
-                $this->info("GPA của sinh viên {$student->name}: {$gpa}");
+                $this->info("GPA of student {$student->name}: {$gpa}");
             } else {
-                $this->error("Không tìm thấy sinh viên với ID: {$studentId}");
+                $this->error("Student not found with ID: {$studentId}");
             }
         } else {
             $students = Student::all();
-            $this->info("Đang tính lại GPA cho {$students->count()} sinh viên...");
+            $this->info("Recalculating GPA for {$students->count()} students...");
             
             foreach ($students as $student) {
                 $gpa = $student->calculateGPA();
                 $this->line("- {$student->name}: {$gpa}");
             }
             
-            $this->info("Hoàn thành!");
+            $this->info("Completed!");
         }
     }
 }
